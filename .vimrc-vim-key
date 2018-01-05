@@ -1,0 +1,78 @@
+
+" Key mappings
+"
+" map function keys
+
+map <F5> :VimuxRunCommand("clear; python ~/compile.py " . bufname("%"))<CR>
+map <F6> :VimuxRunCommand("cd /BROWSE ; cscope -d")<CR>
+map <F7> :DiffSaved<CR>
+
+" turn off search highlight with leader and space
+nnoremap <leader><Space> :nohlsearch<CR>
+
+" Build ctags for current folder and below
+"nmap <leader>t :VimuxRunCommand("clear; ctags -R --c++-kinds=+p --fields=+iaS --extra=+q /" . bufname("%"))<CR>
+nmap <leader>t :VimuxRunCommand("clear; ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .")<CR>
+
+" Vertical split 
+nmap <silent> <C-\>t :vert scs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <silent> <C-\>s :vert scs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <silent> <C-\>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>CR
+nmap <silent> <C-\>g :vert scs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <silent> <C-\>f :vert scs find f <C-R>=expand("<cfile>")<CR><CR>CR
+nmap <silent> <C-\>e :vert scs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <silent> <C-\>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
+nmap <silent> <C-\>c :vert scs find c <C-R>=expand("<cword>")<CR><CR>
+
+" Horizontal split
+nmap <silent> <C-@>t :scs find t <C-R>=expand("<cword>")<CR><CR>CR
+nmap <silent> <C-@>s :scs find s <C-R>=expand("<cword>")<CR><CR>CR
+nmap <silent> <C-@>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>CR
+nmap <silent> <C-@>g :scs find g <C-R>=expand("<cword>")<CR><CR>CR
+nmap <silent> <C-@>f :scs find f <C-R>=expand("<cfile>")<CR><CR>CR
+nmap <silent> <C-@>e :scs find e <C-R>=expand("<cword>")<CR><CR>CR
+nmap <silent> <C-@>d :scs find d <C-R>=expand("<cword>")<CR><CR>
+nmap <silent> <C-@>c :scs find c <C-R>=expand("<cword>")<CR><CR>CR
+
+" Split to a tab
+nmap <silent> <C-@><C-@>t :tab cs find t <C-R>=expand("<cword>")<CR><CR>CR
+nmap <silent> <C-@><C-@>s :tab cs find s <C-R>=expand("<cword>")<CR><CR>CR
+nmap <silent> <C-@><C-@>i :tab cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nmap <silent> <C-@><C-@>g :tab cs find g <C-R>=expand("<cword>")<CR><CR>CR
+nmap <silent> <C-@><C-@>f :tab cs find f <C-R>=expand("<cfile>")<CR><CR>CR
+nmap <silent> <C-@><C-@>e :tab cs find e <C-R>=expand("<cword>")<CR><CR>CR
+nmap <silent> <C-@><C-@>d :tab cs find d <C-R>=expand("<cword>")<CR><CR>
+nmap <silent> <C-@><C-@>c :tab cs find c <C-R>=expand("<cword>")<CR><CR>CR
+
+" Open in same tab
+nmap <silent> <C-\><C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>CR
+nmap <silent> <C-\><C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>CR
+nmap <silent> <C-\><C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nmap <silent> <C-\><C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>CR
+nmap <silent> <C-\><C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>CR
+nmap <silent> <C-\><C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>CR
+nmap <silent> <C-\><C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+nmap <silent> <C-\><C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>CR
+
+" Map @ and direction keys to different tabs"
+map <C-@><up> :tabr<cr>
+map <C-@><down> :tabl<cr>
+map <C-@><left> :tabp<cr>
+map <C-@><right> :tabn<cr>
+
+" Map NERDTree key bindings
+map <silent> <C-n> :NERDTreeToggle<CR>
+
+" move vertically by visual line
+nnoremap j gj
+nnoremap k gk
+" move to beginning/end of line
+nnoremap B ^
+nnoremap E $
+" $/^ doesn't do anything
+nnoremap $ <nop>
+nnoremap ^ <nop>
+
+" Handle comments
+vnoremap <leader>n :normal i//<CR>	
+vnoremap <leader>m :normal xx<CR>

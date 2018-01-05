@@ -1,0 +1,17 @@
+cxunix/source/CommClient/fsClient/  
+cxunix/source/CommClient/CvIDAClient/Scan 
+cxunix/source/CommClient/ClProxyConnAPI 
+cxunix/source/CommClient/clBackup 
+cxunix/source/CommClient/clRestore 
+cxunix/source/CommClient/CvPostOps 
+cxunix/source/CommClient/ifind 
+cxunix/source/CommClient/CvArchive 
+cxunix/source/common/CvIDA/Scan/ 
+cxunix/source/common/CvIDA/Containers/ 
+cxunix/source/common/QiUtils/ 
+cxunix/source/common/CvDataPipe 
+cxunix/source/include 
+cxunix/source/MediaAgent/Indexing* 
+cxunix/source/MediaAgent/ArchiveIndex/ 
+cxunix/source/MediaAgent/ArMgrDS/ 
+cxunix/source/MediaAgent/DataMover2/ 
