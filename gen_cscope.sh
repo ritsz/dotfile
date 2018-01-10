@@ -12,8 +12,9 @@
 	 LNX_PATH_LIST+=$LNX_SNAP_LOCAL_PATH/$p
  done </home/gbuilder/.dotfiles/dirList.txt
 
+# No vcxproj files, CVS directories or CVS temp files needed.
 find $LNX_PATH_LIST \
- ! -path "*.vcxproj" ! -path "*/CVS/*" > /BROWSE/$LNX_SNAP/cscope.files
+ ! -path "*.vcxproj" ! -path "*/CVS/*" ! -path ".#*" > /BROWSE/$LNX_SNAP/cscope.files
 
 
 cd /BROWSE/$LNX_SNAP
