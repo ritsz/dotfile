@@ -21,6 +21,6 @@ cd /BROWSE/$LNX_SNAP
 cscope -b -q -k
 
 clear; 
-ctags -R --verbose --c-kinds=+p --c++-kinds=+p --fields=+iamS --extra=+q $LNX_PATH_LIST
+ctags -R --verbose --c-kinds=+p --c++-kinds=+p --fields=+iamS --extra=+q --exclude=*.vcxproj,*/CVS/*,.#* $LNX_PATH_LIST
 
 
