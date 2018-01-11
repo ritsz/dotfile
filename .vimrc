@@ -33,6 +33,7 @@ set ignorecase			" Ignore case when seaching
 set smartcase			" Use smart case for search
 set ttyfast				" Fast connection
 set title				" Set terminal title 
+set completeopt=menu
 
 if has('mouse')
 	set mouse=a
@@ -72,7 +73,7 @@ com! DiffSaved call s:DiffWithSaved()
 " Load ctags and omnicomplete for C++
 function! SetCPPProj()
 	set tags+=/BROWSE/tags
-	set omnifunc=omni#cpp#complete#Main
+	"set omnifunc=omni#cpp#complete#Main
 endfunction
 
 
@@ -100,6 +101,14 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:NERDTreeDirArrowExpandable = '+'
 let g:NERDTreeDirArrowCollapsible = '-'
 let g:VimuxUseNearest = 0	" Don't use the nearest panel, create a new one
+let g:OmniCpp_NamespaceSearch = 1
+let g:OmniCpp_GlobalScopeSearch = 1
+let g:OmniCpp_ShowAccess = 1
+let g:OmniCpp_DisplayMode = 1
+let g:OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
+let g:OmniCpp_MayCompleteDot = 1 " autocomplete after .
+let g:OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
+let g:OmniCpp_MayCompleteScope = 1 " autocomplete after ::
 
 autocmd BufEnter * lcd %:p:h
 

@@ -47,4 +47,5 @@ sudo apt-get install python3-pip
 su -c 'pip3 install git+git://github.com/Lokaltog/powerline'
 
 # 4. Fish
-#
+# 5. Add symlinks to dotfiles and cvh
+# 6. Add crontab entry

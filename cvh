@@ -48,6 +48,8 @@ if __name__ == '__main__':
         callcmd(cmd)
         cmd = 'ln -s /BROWSE/'+args.snapname+'/cscope.po.out /BROWSE/cscope.po.out'
         callcmd(cmd)
+        cmd = 'ln -s /BROWSE/'+args.snapname+'/tags /BROWSE/tags'
+        callcmd(cmd)
         cmd = 'cscope -d -f /BROWSE/cscope.out'
         os.system(cmd)
 
@@ -63,5 +65,7 @@ if __name__ == '__main__':
         callcmd(cmd)
         cmd = 'ln -s /BROWSE/'+args.snapname+'/cscope.po.out /BROWSE/cscope.po.out'
         callcmd(cmd)
+        callcmd(cmd)
+        cmd = 'ln -s /BROWSE/'+args.snapname+'/tags /BROWSE/tags'
 
 
