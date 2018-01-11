@@ -3,7 +3,7 @@
 "
 " map function keys
 
-map <F5> :VimuxRunCommand("clear; python ~/compile.py " . bufname("%"))<CR>
+map <F5> :VimuxRunCommand("clear; python ~/.dotfile/compile.py " . bufname("%"))<CR>
 map <F6> :VimuxRunCommand("cd /BROWSE ; cscope -d")<CR>
 map <F7> :DiffSaved<CR>
 

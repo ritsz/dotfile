@@ -7,9 +7,11 @@ sudo apt install git
 
 git clone https://github.com/ritsz/dotfile.git ~/.dotfile
 
+ln -s ~/.dotfile ~/.dotfiles
+
 sudo apt install python-dev python3-dev
 
-sudo apt install cscope ctags tmux
+sudo apt install cscope ctags tmux wget curl
 
 sudo apt install libncurses5-dev libgnome2-dev libgnomeui-dev
 
@@ -36,16 +38,28 @@ sudo update-alternatives --set editor /usr/local/bin/vim
 sudo update-alternatives --install /usr/bin/vi vi /usr/local/bin/vim 1
 sudo update-alternatives --set vi /usr/local/bin/vim
 
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
 cd ~
 
 
 
 # 3. Powerline
 
-sudo apt-get install python3-pip
-
-su -c 'pip3 install git+git://github.com/Lokaltog/powerline'
-
 # 4. Fish
+
+sudo apt-get install fish
+
+
+
 # 5. Add symlinks to dotfiles and cvh
+
+sudo cat ~/.dotfile/.bashrc >> ~/.bashrc
+source ~/.bashrc
+
+mkdir ~/.vim
+ln -s ~/.dotfile/.vimrc ~/.vimrc
+ln -s ~/.dotfile/.tmux.conf ~/.tmux.conf
+sudo ln -s ~/.dotfile/cvh /usr/bin/cvh 
+
 # 6. Add crontab entry

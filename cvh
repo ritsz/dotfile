@@ -33,7 +33,7 @@ if __name__ == '__main__':
         callcmd(cmd)
         cmd = 'mount usnfs03.commvault.com:/build/11.0/Build80_'+args.snapname + ' /source/'+args.snapname
         callcmd(cmd)
-        cmd = '/home/gbuilder/gen_cscope.sh '+args.snapname
+        cmd = '/home/gbuilder/.dotfile/gen_cscope.sh '+args.snapname
         callcmd(cmd)
 
     if args.option_name == 'search' and args.snapname : 
@@ -55,7 +55,7 @@ if __name__ == '__main__':
 
     if args.option_name == 'rebuild' and args.snapname :
         print 'Rebuilding ' + args.snapname
-        cmd = '/home/gbuilder/gen_cscope.sh '+args.snapname
+        cmd = '/home/gbuilder/.dotfile/gen_cscope.sh '+args.snapname
         callcmd(cmd)
         cmd = 'rm -f /BROWSE/cscope*'
         callcmd(cmd)

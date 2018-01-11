@@ -58,7 +58,6 @@ function! LoadCscope()
         cs add $CSCOPE_DB
     endif
 endfunction
-au BufEnter /* call LoadCscope()
 
 " Diff of file since last save
 function! s:DiffWithSaved()
@@ -83,6 +82,7 @@ endfunction
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'scrooloose/nerdtree'                                                             
@@ -123,4 +123,5 @@ endif
 
 " Load ctags and omnifunc in C++ files opened
 autocmd BufNewFile,BufRead,BufEnter *.cpp,*.hpp,*.h,*.C call SetCPPProj()
-
+"autocmd BufNewFile,BufRead,BufEnter *.cpp.*.hpp,*.h,*.C cs add /BROWSE/cscope.out
+cs add /BROWSE/cscope.out
