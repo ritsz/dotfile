@@ -3,7 +3,8 @@
 "
 " map function keys
 
-map <F5> :VimuxRunCommand("clear; python ~/.dotfile/compile.py " . bufname("%"))<CR>
+map <F5> :call BuildProj()<CR>
+map <leader><F5> :VimuxRunCommand("clear; python ~/.dotfile/compile.py 1 " . bufname("%"))<CR>
 map <F6> :VimuxRunCommand("cd /BROWSE ; cscope -d")<CR>
 map <F7> :DiffSaved<CR>
 
@@ -72,6 +73,10 @@ nnoremap E $
 " $/^ doesn't do anything
 nnoremap $ <nop>
 nnoremap ^ <nop>
+
+" Quickfix browse
+nnoremap <C-n> :cnext<CR>
+nnoremap <C-p> :cprevious<CR>
 
 " Handle comments
 vnoremap <leader>n :normal i//<CR>	

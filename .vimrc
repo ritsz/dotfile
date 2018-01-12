@@ -72,8 +72,19 @@ com! DiffSaved call s:DiffWithSaved()
 " Load ctags and omnicomplete for C++
 function! SetCPPProj()
 	set tags+=/BROWSE/tags
-	"set omnifunc=omni#cpp#complete#Main
+	cs add /BROWSE/cscope.out
 endfunction
+
+" Build current directory. Parent directory on error
+function! BuildProj()
+	AsyncRun clear; python ~/.dotfile/compile.py %
+	sleep 5000m
+	if g:asyncrun_code == 11
+		lcd ..
+		AsyncRun clear; python ~/.dotfile/compile.py %
+	endif
+endfunction
+
 
 
 ""
@@ -87,6 +98,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'scrooloose/nerdtree'                                                             
 Plugin 'benmills/vimux'
+Plugin 'skywind3000/asyncrun.vim'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -98,6 +110,7 @@ filetype plugin indent on    " required
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
 let g:NERDTreeDirArrowExpandable = '+'
 let g:NERDTreeDirArrowCollapsible = '-'
 let g:VimuxUseNearest = 0	" Don't use the nearest panel, create a new one
@@ -123,5 +136,3 @@ endif
 
 " Load ctags and omnifunc in C++ files opened
 autocmd BufNewFile,BufRead,BufEnter *.cpp,*.hpp,*.h,*.C call SetCPPProj()
-"autocmd BufNewFile,BufRead,BufEnter *.cpp.*.hpp,*.h,*.C cs add /BROWSE/cscope.out
-cs add /BROWSE/cscope.out
