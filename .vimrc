@@ -77,13 +77,65 @@ endfunction
 
 " Build current directory. Parent directory on error
 function! BuildProj()
-	AsyncRun clear; python ~/.dotfile/compile.py %
+	AsyncRun clear; python ~/.dotfile/remoteCommands.py 1 %:p
 	sleep 5000m
 	if g:asyncrun_code == 11
+		" chdir to parent directory.
+		" We are going to build in parent directory, so errors, if any,
+		" get relative path from parent directory. Thus quickfix requires
+		" cdpath to be parent directory
 		lcd ..
-		AsyncRun clear; python ~/.dotfile/compile.py %
+		" Try the parent directory
+		AsyncRun clear; python ~/.dotfile/remoteCommands.py 1 %:p:h
 	endif
 endfunction
+
+" Use the downloaded cvs diff file to create a vimdiff
+function! s:Cvsdiff(...)
+	if a:0 > 1
+		let rev = a:2
+	else
+		let rev = ''
+	endif
+
+	let ftype = &filetype
+	let tmpfile = tempname()
+	" Write current file to tmpfile
+	let cmd = "cat " . expand("%:p") . " > " . tmpfile  
+	let cmd_output = system(cmd)
+	if v:shell_error && cmd_output != ""
+		echohl WarningMsg | echon cmd_output
+		return
+	endif
+
+	" Download cvs diff to tmpdiff on localpath.
+	let cmd = "python ~/.dotfile/remoteCommands.py 3 " . expand("%:p") . " " . rev
+	let cmd_output = system(cmd)
+	if v:shell_error && cmd_output != ""
+		echohl WarningMsg | echon cmd_output
+		return
+	endif
+
+	" Reverse patch the tmpfile. This removes the changes in tmpfile
+	let cmd = "patch -R -p0 " . tmpfile . " /tmp/tmpdiff"
+	let cmd_output = system(cmd)
+	if v:shell_error && cmd_output != ""
+		echohl WarningMsg | echon cmd_output
+		return
+	endif
+
+	" Now vimdiff between tmpfile and this file.
+	exe "vert diffsplit" . tmpfile
+	exe "set filetype=" . ftype
+
+	let cmd = "rm -f tmpdiff"
+	let cmd_output = system(cmd)
+	if v:shell_error && cmd_output != ""
+		echohl WarningMsg | echon cmd_output
+		return
+	endif
+endfunction
+com! -bar -nargs=? Cvsdiff :call s:Cvsdiff(<f-args>)
 
 
 

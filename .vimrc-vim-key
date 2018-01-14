@@ -4,9 +4,10 @@
 " Map function keys
 
 noremap <F5> :call BuildProj()<CR>
-noremap <leader><F5> :VimuxRunCommand("clear; python ~/.dotfile/compile.py 1 " . bufname("%"))<CR>
+noremap <leader><F5> :VimuxRunCommand("clear; python ~/.dotfile/remoteCommands.py 2 " . expand("%:p"))<CR>
 noremap <F6> :VimuxRunCommand("cd /BROWSE ; cscope -d")<CR>
-noremap <F7> :DiffSaved<CR>
+noremap <F7> :Cvsdiff<CR>
+noremap <leader><F7> :DiffSaved<CR>
 
 " turn off search highlight with leader and space
 nnoremap <leader><Space> :nohlsearch<CR>
@@ -80,3 +81,7 @@ nnoremap <C-p> :cprevious<CR>
 " Handle comments
 vnoremap <leader>n :normal i//<CR>	
 vnoremap <leader>m :normal xx<CR>
+
+" Map cvs diff command and keys
+" [c and ]c to previous and next diff.
+noremap <unique> <script> <plug>Cvsdiff :call <SID>Cvsdiff()<CR>
