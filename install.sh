@@ -15,6 +15,8 @@ sudo apt install cscope ctags tmux wget curl
 
 sudo apt install libncurses5-dev libgnome2-dev libgnomeui-dev
 
+sudo apt install clang clang-format clang-tidy
+
 
 
 # 2. New vim

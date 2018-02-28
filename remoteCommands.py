@@ -9,6 +9,7 @@ port = 22
 username = "gbuilder"
 password = "gbuilder"
 nbytes = 4096
+nodeName = ''
 
 
 def SSH_Session():
@@ -20,10 +21,12 @@ def SSH_Session():
 # Convert local nfs parent path to the parent path on the server.
 # Assumes that the fullpath of file in local nfs mount is provided.
 def create_path(s, revIndex = 0):
+    global nodeName
     index = int(-1 - revIndex)
     #Ignore the first 2 splits as it is '' and 'DIR'
     x = s.split('/')[2:index]
     nodeName = '/build/11.0/Build80_'+x[0]
+    print "Nodename: ", nodeName
     x.pop(0)
     x.insert(0, nodeName)
     path = '/'.join(x)
@@ -68,7 +71,12 @@ def downloaddiff(fileParentPath, fileName, rev = ''):
 
 
 def compile(path):
-    cmd = 'cd ' + path + '; make64; '
+    global nodeName
+    cmd = ''
+    if 'ClProxyConnAPI/Client' in path:
+        cmd = 'cd ' + nodeName +'/cxunix/source; ./buildIBMI'
+    else:
+        cmd = 'cd ' + path + '; make64; '
     session = SSH_Session();
     session.exec_command(cmd)
 
