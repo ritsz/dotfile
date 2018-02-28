@@ -8,6 +8,7 @@ noremap <leader><F5> :VimuxRunCommand("clear; python ~/.dotfile/remoteCommands.p
 noremap <F6> :VimuxRunCommand("cd /BROWSE ; cscope -d")<CR>
 noremap <F7> :Cvsdiff<CR>
 noremap <F8> :VimuxRunCommand("cppcheck --force --enable=information " . expand("%"))<CR>
+noremap <F9> :ClangFormat<CR>
 noremap <leader><F7> :DiffSaved<CR>
 
 " turn off search highlight with leader and space
