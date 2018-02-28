@@ -36,7 +36,7 @@ set title				" Set terminal title
 set completeopt=menu
 
 if has('mouse')
-	set mouse=a
+	set mouse=v
 endif
 
 
