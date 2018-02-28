@@ -40,6 +40,8 @@ if __name__ == '__main__':
         print 'searching ' + args.snapname
         cmd = 'cd /BROWSE'
         callcmd(cmd)
+        cmd = 'rm -f /BROWSE/tag*'
+        callcmd(cmd)
         cmd = 'rm -f /BROWSE/cscope*'
         callcmd(cmd)
         cmd = 'ln -s /BROWSE/'+args.snapname+'/cscope.out /BROWSE/cscope.out'
@@ -57,6 +59,8 @@ if __name__ == '__main__':
         print 'Rebuilding ' + args.snapname
         cmd = '/home/gbuilder/.dotfile/gen_cscope.sh '+args.snapname
         callcmd(cmd)
+        cmd = 'rm -f /BROWSE/tag*'
+        callcmd(cmd)
         cmd = 'rm -f /BROWSE/cscope*'
         callcmd(cmd)
         cmd = 'ln -s /BROWSE/'+args.snapname+'/cscope.out /BROWSE/cscope.out'
@@ -65,6 +69,6 @@ if __name__ == '__main__':
         callcmd(cmd)
         cmd = 'ln -s /BROWSE/'+args.snapname+'/cscope.po.out /BROWSE/cscope.po.out'
         callcmd(cmd)
-        callcmd(cmd)
         cmd = 'ln -s /BROWSE/'+args.snapname+'/tags /BROWSE/tags'
+        callcmd(cmd)
 

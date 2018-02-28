@@ -7,6 +7,7 @@ noremap <F5> :call BuildProj()<CR>
 noremap <leader><F5> :VimuxRunCommand("clear; python ~/.dotfile/remoteCommands.py 2 " . expand("%:p"))<CR>
 noremap <F6> :VimuxRunCommand("cd /BROWSE ; cscope -d")<CR>
 noremap <F7> :Cvsdiff<CR>
+noremap <F8> :VimuxRunCommand("cppcheck --force --enable=information " . expand("%"))<CR>
 noremap <leader><F7> :DiffSaved<CR>
 
 " turn off search highlight with leader and space
