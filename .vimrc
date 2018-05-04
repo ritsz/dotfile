@@ -1,5 +1,6 @@
 syntax on
 let mapleader=','
+color dracula
 set encoding=utf-8
 set noexpandtab
 set autoindent			" Copy indentation of current line.
@@ -218,3 +219,10 @@ endif
 
 " Load ctags and omnifunc in C++ files opened
 autocmd BufNewFile,BufRead,BufEnter *.cpp,*.hpp,*.h,*.C call SetCPPProj()
+
+
+" Store temporary files in a central spot
+let vimtmp = $HOME . '/.tmp/' . getpid()
+silent! call mkdir(vimtmp, "p", 0700)
+let &backupdir=vimtmp
+let &directory=vimtmp

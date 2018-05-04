@@ -59,9 +59,10 @@ sudo apt-get install fish
 sudo cat ~/.dotfile/.bashrc >> ~/.bashrc
 source ~/.bashrc
 
-mkdir ~/.vim
+mkdir -p ~/.vim/colors
 ln -s ~/.dotfile/.vimrc ~/.vimrc
 ln -s ~/.dotfile/.tmux.conf ~/.tmux.conf
 sudo ln -s ~/.dotfile/cvh /usr/bin/cvh 
+sudo ln -s ~/.dotfile/dracula.vim ~/.vim/colors/dracula.vim
 
 # 6. Add crontab entry
