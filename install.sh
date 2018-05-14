@@ -15,7 +15,7 @@ sudo apt install cscope ctags tmux wget curl
 
 sudo apt install libncurses5-dev libgnome2-dev libgnomeui-dev
 
-sudo apt install clang clang-format clang-tidy
+sudo apt install clang clang-format-3.9 clang-tidy
 
 
 
@@ -64,5 +64,6 @@ ln -s ~/.dotfile/.vimrc ~/.vimrc
 ln -s ~/.dotfile/.tmux.conf ~/.tmux.conf
 sudo ln -s ~/.dotfile/cvh /usr/bin/cvh 
 sudo ln -s ~/.dotfile/dracula.vim ~/.vim/colors/dracula.vim
+sudo ln -s /usr/bin/clang-format-3.9 /usr/bin/clang-format
 
 # 6. Add crontab entry

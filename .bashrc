@@ -12,7 +12,12 @@ fi
 
 # alias vim="nvim"
 
-export CSCOPE_EDITOR=vim
+if [ -z "$DISPLAY" ]
+then
+	export CSCOPE_EDITOR=vim
+else
+	export CSCOPE_EDITOR=gvim
+fi
 export CSCOPE_DB=/BROWSE/cscope.out
 export PATH=${PATH}:~/.local/bin
 

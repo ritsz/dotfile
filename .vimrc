@@ -1,6 +1,5 @@
 syntax on
 let mapleader=','
-color dracula
 set encoding=utf-8
 set noexpandtab
 set autoindent			" Copy indentation of current line.
@@ -226,3 +225,11 @@ let vimtmp = $HOME . '/.tmp/' . getpid()
 silent! call mkdir(vimtmp, "p", 0700)
 let &backupdir=vimtmp
 let &directory=vimtmp
+
+
+if has("gui_running")
+	colorscheme default
+	set guifont=Monospace\ 12
+else
+	colorscheme autumnleaf
+endif
