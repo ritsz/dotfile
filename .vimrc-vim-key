@@ -3,13 +3,17 @@
 "
 " Map function keys
 
-noremap <F5> :call BuildProj()<CR>
-noremap <leader><F5> :VimuxRunCommand("clear; python ~/.dotfile/remoteCommands.py 2 " . expand("%:p"))<CR>
-noremap <F6> :VimuxRunCommand("cd /BROWSE ; cscope -d")<CR>
 noremap <F7> :Cvsdiff<CR>
+noremap <leader><F7> :DiffSaved<CR>
+noremap <F6> :VimuxRunCommand("cd /BROWSE ; cscope -d")<CR>
+noremap <leader><F5> :VimuxRunCommand("clear; python ~/.dotfile/remoteCommands.py 2 " . expand("%:p"))<CR>
 noremap <F8> :VimuxRunCommand("cppcheck --force --enable=information " . expand("%"))<CR>
 noremap <F9> :ClangFormat<CR>
-noremap <leader><F7> :DiffSaved<CR>
+if &diff
+	noremap <F5> :call BuildProj()<CR>
+else
+	noremap <silent> <F5> :diffupdate<CR>
+endif
 
 " turn off search highlight with leader and space
 nnoremap <leader><Space> :nohlsearch<CR>
@@ -58,10 +62,10 @@ nnoremap <silent> <C-\><C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 nnoremap <silent> <C-\><C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>CR
 
 " noremap @ and direction keys to different tabs"
-noremap <C-@><up> :tabr<cr>
-noremap <C-@><down> :tabl<cr>
-noremap <C-@><left> :tabp<cr>
-noremap <C-@><right> :tabn<cr>
+noremap <silent> <leader><up> :tabr<cr>
+noremap <silent> <leader><down> :tabl<cr>
+noremap <silent> <leader><left> :tabp<cr>
+noremap <silent> <leader><right> :tabn<cr>
 
 " Map NERDTree key bindings
 nnoremap <silent> <C-n> :NERDTreeToggle<CR>
@@ -77,8 +81,16 @@ nnoremap $ <nop>
 nnoremap ^ <nop>
 
 " Quickfix browse
+" Diff browse
 nnoremap <C-m> :cnext<CR>
-nnoremap <C-p> :cprevious<CR>
+if &diff
+	nnoremap <C-p> :cprevious<CR>
+else
+	noremap <C-u> [c
+	noremap <C-d> ]c
+	noremap <C-g> :diffget<CR>
+	noremap <C-p> :diffput<CR>
+endif
 
 " Handle comments
 vnoremap <leader>n :normal i//<CR>	
@@ -87,3 +99,6 @@ vnoremap <leader>m :normal xx<CR>
 " Map cvs diff command and keys
 " [c and ]c to previous and next diff.
 noremap <unique> <script> <plug>Cvsdiff :call <SID>Cvsdiff()<CR>
+
+" Move around diff
+

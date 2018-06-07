@@ -181,6 +181,7 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'scrooloose/nerdtree'                                                             
 Plugin 'benmills/vimux'
 Plugin 'skywind3000/asyncrun.vim'
+Plugin 'chrisbra/vim-diff-enhanced'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -231,5 +232,5 @@ if has("gui_running")
 	colorscheme default
 	set guifont=Monospace\ 12
 else
-	colorscheme autumnleaf
+	colorscheme dracula
 endif
