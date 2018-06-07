@@ -9,11 +9,8 @@ noremap <F6> :VimuxRunCommand("cd /BROWSE ; cscope -d")<CR>
 noremap <leader><F5> :VimuxRunCommand("clear; python ~/.dotfile/remoteCommands.py 2 " . expand("%:p"))<CR>
 noremap <F8> :VimuxRunCommand("cppcheck --force --enable=information " . expand("%"))<CR>
 noremap <F9> :ClangFormat<CR>
-if &diff
-	noremap <F5> :call BuildProj()<CR>
-else
-	noremap <silent> <F5> :diffupdate<CR>
-endif
+noremap <F5> :call BuildProj()<CR>
+noremap <silent> <leader><F5> :diffupdate<CR>
 
 " turn off search highlight with leader and space
 nnoremap <leader><Space> :nohlsearch<CR>
@@ -81,24 +78,18 @@ nnoremap $ <nop>
 nnoremap ^ <nop>
 
 " Quickfix browse
-" Diff browse
 nnoremap <C-m> :cnext<CR>
-if &diff
-	nnoremap <C-p> :cprevious<CR>
-else
-	noremap <C-u> [c
-	noremap <C-d> ]c
-	noremap <C-g> :diffget<CR>
-	noremap <C-p> :diffput<CR>
-endif
+nnoremap <C-b> :cprevious<CR>
 
 " Handle comments
 vnoremap <leader>n :normal i//<CR>	
 vnoremap <leader>m :normal xx<CR>
 
 " Map cvs diff command and keys
-" [c and ]c to previous and next diff.
 noremap <unique> <script> <plug>Cvsdiff :call <SID>Cvsdiff()<CR>
 
 " Move around diff
-
+noremap <C-u> [c
+noremap <C-d> ]c
+noremap <C-g> :diffget<CR>
+noremap <C-p> :diffput<CR>
