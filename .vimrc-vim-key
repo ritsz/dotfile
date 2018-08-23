@@ -93,3 +93,9 @@ noremap <C-u> [c
 noremap <C-d> ]c
 noremap <C-g> :diffget<CR>
 noremap <C-p> :diffput<CR>
+
+" Buffer switch
+nnoremap <silent> <C-@>q :buffer 1<CR>
+nnoremap <silent> <C-@>w :buffer 2<CR>
+nnoremap <silent> <C-@>e :buffer 3<CR>
+nnoremap <silent> <C-@>r :buffer 4<CR>

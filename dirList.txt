@@ -15,3 +15,4 @@ cxunix/source/MediaAgent/Indexing*
 cxunix/source/MediaAgent/ArchiveIndex/ 
 cxunix/source/MediaAgent/ArMgrDS/ 
 cxunix/source/MediaAgent/DataMover2/ 
+cxunix/source/MediaAgent/FsRestoreLib/ 

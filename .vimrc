@@ -182,6 +182,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'benmills/vimux'
 Plugin 'skywind3000/asyncrun.vim'
 Plugin 'chrisbra/vim-diff-enhanced'
+Plugin 'severin-lemaignan/vim-minimap'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
