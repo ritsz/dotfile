@@ -1,10 +1,11 @@
 cxunix/source/CommClient/fsClient/  
-cxunix/source/CommClient/CvIDAClient/Scan 
+cxunix/source/CommClient/CvIDAClient/ 
 cxunix/source/CommClient/ClProxyConnAPI 
 cxunix/source/CommClient/clBackup 
 cxunix/source/CommClient/clRestore 
 cxunix/source/CommClient/CvPostOps 
 cxunix/source/CommClient/ifind 
+cxunix/source/CommClient/ContentContainerTest
 cxunix/source/CommClient/CvArchive 
 cxunix/source/common/CvIDA/Scan/ 
 cxunix/source/common/CvIDA/Containers/ 
@@ -16,3 +17,4 @@ cxunix/source/MediaAgent/ArchiveIndex/
 cxunix/source/MediaAgent/ArMgrDS/ 
 cxunix/source/MediaAgent/DataMover2/ 
 cxunix/source/MediaAgent/FsRestoreLib/ 
+cxunix/source/CommClient/sdmrestore/

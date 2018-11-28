@@ -183,6 +183,11 @@ Plugin 'benmills/vimux'
 Plugin 'skywind3000/asyncrun.vim'
 Plugin 'chrisbra/vim-diff-enhanced'
 Plugin 'severin-lemaignan/vim-minimap'
+Plugin 'hari-rangarajan/CCTree'
+Plugin 'roxma/vim-hug-neovim-rpc'
+Plugin 'roxma/nvim-yarp'
+Plugin 'Shougo/deoplete.nvim'
+Plugin 'Yggdroot/indentLine'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -191,6 +196,7 @@ filetype plugin indent on    " required
 "
 " Set global values
 "
+"let g:deoplete#enable_at_startup = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'

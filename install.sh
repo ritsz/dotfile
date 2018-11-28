@@ -9,6 +9,8 @@ git clone https://github.com/ritsz/dotfile.git ~/.dotfile
 
 ln -s ~/.dotfile ~/.dotfiles
 
+sudo apt-get install build-essential cmake
+
 sudo apt install python-dev python3-dev
 
 sudo apt install cscope ctags tmux wget curl
