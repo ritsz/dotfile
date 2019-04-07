@@ -1,4 +1,3 @@
-
 " Key Mappings
 "
 " Map function keys
@@ -48,7 +47,7 @@ nnoremap <silent> <C-@><C-@>e :tab cs find e <C-R>=expand("<cword>")<CR><CR>CR
 nnoremap <silent> <C-@><C-@>d :tab cs find d <C-R>=expand("<cword>")<CR><CR>
 nnoremap <silent> <C-@><C-@>c :tab cs find c <C-R>=expand("<cword>")<CR><CR>CR
 
-" Open in same tab
+" Open in same tab, different buffer
 nnoremap <silent> <C-\><C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>CR
 nnoremap <silent> <C-\><C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>CR
 nnoremap <silent> <C-\><C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
@@ -58,35 +57,8 @@ nnoremap <silent> <C-\><C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>CR
 nnoremap <silent> <C-\><C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 nnoremap <silent> <C-\><C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>CR
 
-" noremap @ and direction keys to different tabs"
-noremap <silent> <leader><up> :tabr<cr>
-noremap <silent> <leader><down> :tabl<cr>
-noremap <silent> <leader><left> :tabp<cr>
-noremap <silent> <leader><right> :tabn<cr>
-
 " Map NERDTree key bindings
 nnoremap <silent> <C-n> :NERDTreeToggle<CR>
-
-" move vertically by visual line
-nnoremap j gj
-nnoremap k gk
-" move to beginning/end of line
-nnoremap B ^
-nnoremap E $
-" $/^ doesn't do anything
-nnoremap $ <nop>
-nnoremap ^ <nop>
-
-" Quickfix browse
-nnoremap <C-m> :cnext<CR>
-nnoremap <C-b> :cprevious<CR>
-
-" Handle comments
-vnoremap <leader>n :normal i//<CR>	
-vnoremap <leader>m :normal xx<CR>
-
-" Map cvs diff command and keys
-noremap <unique> <script> <plug>Cvsdiff :call <SID>Cvsdiff()<CR>
 
 " Move around diff
 noremap <C-u> [c
@@ -94,8 +66,43 @@ noremap <C-d> ]c
 noremap <C-g> :diffget<CR>
 noremap <C-p> :diffput<CR>
 
+" Quickfix browse
+nnoremap <C-m> :cnext<CR>
+nnoremap <C-b> :cprevious<CR>
+
+" move vertically by visual line
+nnoremap j gj
+nnoremap k gk
+" move to start/end of line
+nnoremap S ^
+nnoremap E $
+" Move current line
+nnoremap <silent> C zz
+nnoremap <silent> T zt
+nnoremap <silent> B zb
+" MOve to parent block
+nnoremap <silent> U [{
+nnoremap <silent> D ]}
+" $/^ doesn't do anything
+nnoremap $ <nop>
+nnoremap ^ <nop>
+
+" Handle comments
+vnoremap <leader>n :normal i//<CR>	
+vnoremap <leader>m :normal xx<CR>
+
+" Tabs are like workspaces. Different 'works' should 
+" have different tabs.
+" Windows are buffers in same plane.
+" Buffers are like open instances of files. Same work should be
+" in same tab with different buffers and windows.
+" noremap leader and direction keys to different tabs"
+noremap <silent> <leader><left>  :bp<cr>
+noremap <silent> <leader><right> :bn<cr>
+
 " Buffer switch
-nnoremap <silent> <C-@>q :buffer 1<CR>
-nnoremap <silent> <C-@>w :buffer 2<CR>
-nnoremap <silent> <C-@>e :buffer 3<CR>
-nnoremap <silent> <C-@>r :buffer 4<CR>
+nnoremap <silent> <leader>q :tabnext<CR>
+nnoremap <silent> <leader>r :tabp<CR>
+
+" Map cvs diff command and keys
+noremap <unique> <script> <plug>Cvsdiff :call <SID>Cvsdiff()<CR>
