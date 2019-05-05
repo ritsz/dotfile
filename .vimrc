@@ -34,6 +34,7 @@ set smartcase			" Use smart case for search
 set ttyfast				" Fast connection
 set title				" Set terminal title 
 set completeopt=menu
+set wildmenu
 
 if has('mouse')
 	set mouse=v
@@ -44,6 +45,16 @@ endif
 "
 "Commands
 "
+
+" Highlight searches and active word
+function! HLNext (blinktime)
+	let target_pat = '\c\%#'.@/
+	let ring = matchadd('ErrorMsg', target_pat, 101)
+	redraw
+	exec 'sleep ' . float2nr(a:blinktime * 8000) . 'm'
+	call matchdelete(ring)
+	redraw
+endfunction
 
 function! LoadCscope()
     let db = findfile("cscope.out", ".;")
@@ -188,9 +199,9 @@ Plugin 'roxma/vim-hug-neovim-rpc'
 Plugin 'roxma/nvim-yarp'
 Plugin 'Shougo/deoplete.nvim'
 Plugin 'Yggdroot/indentLine'
+Plugin 'octol/vim-cpp-enhanced-highlight'
 call vundle#end()            " required
 filetype plugin indent on    " required
-
 
 
 "
@@ -203,6 +214,11 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
 let g:NERDTreeDirArrowExpandable = '+'
 let g:NERDTreeDirArrowCollapsible = '-'
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_class_decl_highlight = 1
+let g:cpp_experimental_simple_template_highlight = 1
+let g:cpp_concepts_highlight = 1
 let g:VimuxUseNearest = 0	" Don't use the nearest panel, create a new one
 let g:OmniCpp_NamespaceSearch = 1
 let g:OmniCpp_GlobalScopeSearch = 1
@@ -241,3 +257,5 @@ if has("gui_running")
 else
 	colorscheme dracula
 endif
+
+

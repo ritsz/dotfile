@@ -1,18 +1,27 @@
 " Key Mappings
 "
+" Hate these errors !!!
+
+cmap Wq wq
+cmap W w
+cmap WQ wq
+
 " Map function keys
 
-noremap <F7> :Cvsdiff<CR>
-noremap <leader><F7> :DiffSaved<CR>
+noremap <F5> :call BuildProj()<CR>
 noremap <F6> :VimuxRunCommand("cd /BROWSE ; cscope -d")<CR>
-noremap <leader><F5> :VimuxRunCommand("clear; python ~/.dotfile/remoteCommands.py 2 " . expand("%:p"))<CR>
+noremap <F7> :Cvsdiff<CR>
 noremap <F8> :VimuxRunCommand("cppcheck --force --enable=information " . expand("%"))<CR>
 noremap <F9> :ClangFormat<CR>
-noremap <F5> :call BuildProj()<CR>
+" :noremap <leader><F5> :VimuxRunCommand("clear; python ~/.dotfile/remoteCommands.py 2 " . expand("%:p"))<CR>
+noremap <leader><F7> :DiffSaved<CR>
 noremap <silent> <leader><F5> :diffupdate<CR>
 
 " turn off search highlight with leader and space
-nnoremap <leader><Space> :nohlsearch<CR>
+nnoremap <leader><Space> :set hlsearch!<CR>
+nnoremap <silent> n n:call HLNext(0.1)<cr>
+nnoremap <silent> N N:call HLNext(0.1)<cr>
+
 
 " Build ctags for current folder and below
 nnoremap <silent> <leader>t :VimuxRunCommand("clear; ctags -R --verbose --c-kinds=+p --c++-kinds=+p --fields=+iamS --extra=+q --exclude=*.vcxproj,*/CVS/*,.#* .")<CR>
@@ -97,8 +106,8 @@ vnoremap <leader>m :normal xx<CR>
 " Buffers are like open instances of files. Same work should be
 " in same tab with different buffers and windows.
 " noremap leader and direction keys to different tabs"
-noremap <silent> <leader><left>  :bp<cr>
-noremap <silent> <leader><right> :bn<cr>
+nnoremap <silent> <Tab>  :bn<cr>
+nnoremap <silent> <S-Tab> :bp<cr>
 
 " Buffer switch
 nnoremap <silent> <leader>q :tabnext<CR>
@@ -106,3 +115,4 @@ nnoremap <silent> <leader>r :tabp<CR>
 
 " Map cvs diff command and keys
 noremap <unique> <script> <plug>Cvsdiff :call <SID>Cvsdiff()<CR>
+
