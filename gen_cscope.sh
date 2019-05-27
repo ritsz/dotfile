@@ -15,7 +15,7 @@
 
 # No vcxproj files, CVS directories or CVS temp files needed.
 find $LNX_PATH_LIST \
- ! -path "*.vcxproj*" ! -path "*/CVS/*"  ! -path "*_format"  ! -path "*#*" ! -path "*.cpp.*" ! -path "*.h.*" ! -path "*.C.*" > /BROWSE/$LNX_SNAP/cscope.files
+ -not -path "*/\.*" ! -path "*.vcxproj*" ! -path "*/CVS/*"  ! -path "*_format"  ! -path "*#*" ! -path "*.cpp.*" ! -path "*.h.*" ! -path "*.C.*" > /BROWSE/$LNX_SNAP/cscope.files
 
 echo $LNX_PATH_LIST
 
