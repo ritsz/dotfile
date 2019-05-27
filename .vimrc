@@ -51,7 +51,7 @@ function! HLNext (blinktime)
 	let target_pat = '\c\%#'.@/
 	let ring = matchadd('ErrorMsg', target_pat, 101)
 	redraw
-	exec 'sleep ' . float2nr(a:blinktime * 8000) . 'm'
+	exec 'sleep ' . float2nr(a:blinktime * 2000) . 'm'
 	call matchdelete(ring)
 	redraw
 endfunction
@@ -119,8 +119,8 @@ function! s:ClangFormat()
 		return
 	endif
 
-	" Copy format file over current file
-	let cmd = "cp " . expand("%") . "_format " . expand("%")
+	" Move format file over current file
+	let cmd = "mv " . expand("%") . "_format " . expand("%")
 	let cmd_output = system(cmd)
 	if v:shell_error && cmd_output != ""
 		echohl WarningMsg | echon cmd_output
@@ -200,6 +200,7 @@ Plugin 'roxma/nvim-yarp'
 Plugin 'Shougo/deoplete.nvim'
 Plugin 'Yggdroot/indentLine'
 Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'easymotion/vim-easymotion'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -257,5 +258,3 @@ if has("gui_running")
 else
 	colorscheme dracula
 endif
-
-
