@@ -35,6 +35,7 @@ set ttyfast				" Fast connection
 set title				" Set terminal title 
 set completeopt=menu
 set wildmenu
+set nowrap
 
 if has('mouse')
 	set mouse=v
@@ -178,6 +179,18 @@ function! s:Cvsdiff(...)
 endfunction
 com! -bar -nargs=? Cvsdiff :call s:Cvsdiff(<f-args>)
 
+function! WinMove(key)
+	let t:curwin = winnr()
+	exec "wincmd ".a:key
+	if (t:curwin == winnr())
+		if (match(a:key,'[jk]'))
+			wincmd v
+		else
+			wincmd s
+		endif
+		exec "wincmd ".a:key
+	endif
+endfunction
 
 
 ""
@@ -187,20 +200,23 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
+"Plugin 'Shougo/deoplete.nvim'
+"Plugin 'benmills/vimux'
+"Plugin 'hari-rangarajan/CCTree'
+"Plugin 'kristijanhusak/vim-hybrid-material'
+"Plugin 'octol/vim-cpp-enhanced-highlight'
+"Plugin 'roxma/nvim-yarp'
+"Plugin 'roxma/vim-hug-neovim-rpc'
+"Plugin 'sainnhe/vim-color-forest-night'
+"Plugin 'severin-lemaignan/vim-minimap'
+"Plugin 'sheerun/vim-polyglot'
+Plugin 'Yggdroot/indentLine'
+Plugin 'chrisbra/vim-diff-enhanced'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'scrooloose/nerdtree'                                                             
+Plugin 'skywind3000/asyncrun.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'scrooloose/nerdtree'                                                             
-Plugin 'benmills/vimux'
-Plugin 'skywind3000/asyncrun.vim'
-Plugin 'chrisbra/vim-diff-enhanced'
-Plugin 'severin-lemaignan/vim-minimap'
-Plugin 'hari-rangarajan/CCTree'
-Plugin 'roxma/vim-hug-neovim-rpc'
-Plugin 'roxma/nvim-yarp'
-Plugin 'Shougo/deoplete.nvim'
-Plugin 'Yggdroot/indentLine'
-Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'easymotion/vim-easymotion'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -209,6 +225,7 @@ filetype plugin indent on    " required
 " Set global values
 "
 "let g:deoplete#enable_at_startup = 1
+"let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
@@ -242,7 +259,7 @@ else
 endif
 
 " Load ctags and omnifunc in C++ files opened
-autocmd BufNewFile,BufRead,BufEnter *.cpp,*.hpp,*.h,*.C call SetCPPProj()
+" autocmd BufNewFile,BufRead,BufEnter *.cpp,*.hpp,*.h,*.C call SetCPPProj()
 
 
 " Store temporary files in a central spot
@@ -252,9 +269,11 @@ let &backupdir=vimtmp
 let &directory=vimtmp
 
 
-if has("gui_running")
-	colorscheme default
-	set guifont=Monospace\ 12
-else
-	colorscheme dracula
-endif
+"if has("gui_running")
+"	colorscheme default
+"	set guifont=Monospace\ 12
+"else
+"	colorscheme forest-night
+" 	colorscheme dracula
+"	colorscheme hybrid_reverse
+"endif

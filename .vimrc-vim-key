@@ -107,7 +107,7 @@ vnoremap <leader>m :normal xx<CR>
 " in same tab with different buffers and windows.
 " noremap leader and direction keys to different tabs"
 nnoremap <silent> <Tab>  :bn<cr>
-nnoremap <silent> <S-Tab> :bp<cr>
+nnoremap <silent> <S-Tab> <c-^> 
 
 " Buffer switch
 nnoremap <silent> <leader>q :tabnext<CR>
@@ -129,3 +129,15 @@ nmap <Leader>L <Plug>(easymotion-overwin-line)
 
 map  <Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader>w <Plug>(easymotion-overwin-w)
+
+"autoclose tags
+inoremap ( ()<Left>
+inoremap { {<CR>}<Esc>ko
+inoremap [ []<Left>
+inoremap " ""<Left>
+
+"move to the split in the direction shown, or create a new split"
+nnoremap <silent> <C-h> :call WinMove('h')<cr>
+nnoremap <silent> <C-j> :call WinMove('j')<cr>
+nnoremap <silent> <C-k> :call WinMove('k')<cr>
+nnoremap <silent> <C-l> :call WinMove('l')<cr>
