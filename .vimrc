@@ -3,13 +3,12 @@ let mapleader=','
 set encoding=utf-8
 set noexpandtab
 set autoindent			" Copy indentation of current line.
-set smartindent			" Indentations after new block like {
 set cindent				" Use C indentation rules
 set tabstop=4
 set shiftwidth=4
 set softtabstop=0
-set nu
-set rnu
+set number
+set relativenumber
 set ruler
 set laststatus=2
 set backspace=indent,eol,start
@@ -28,6 +27,7 @@ set foldlevelstart=10
 set nocompatible
 set modifiable
 set autoread			" Autodetect and read when file is changed outside
+set autowrite			" Write the contents of the file on buffer changes
 set clipboard=unnamed
 set ignorecase			" Ignore case when seaching
 set smartcase			" Use smart case for search
@@ -48,7 +48,7 @@ endif
 "
 
 " Highlight searches and active word
-function! HLNext (blinktime)
+function! HLNext (blinktime) abort
 	let target_pat = '\c\%#'.@/
 	let ring = matchadd('ErrorMsg', target_pat, 101)
 	redraw
@@ -57,7 +57,7 @@ function! HLNext (blinktime)
 	redraw
 endfunction
 
-function! LoadCscope()
+function! LoadCscope() abort
     let db = findfile("cscope.out", ".;")
     if (!empty(db))
         let path = strpart(db, 0, match(db, "/cscope.out$"))
@@ -72,7 +72,7 @@ function! LoadCscope()
 endfunction
 
 " Diff of file since last save
-function! s:DiffWithSaved()
+function! s:DiffWithSaved() abort
 	let filetype=&ft
 	diffthis
 	vnew | r # | normal! 1Gdd
@@ -88,7 +88,7 @@ function! SetCPPProj()
 endfunction
 
 " Build current directory. Parent directory on error
-function! BuildProj()
+function! BuildProj() abort
 	AsyncRun clear; python ~/.dotfile/remoteCommands.py 1 %:p
 	sleep 5000m
 	if g:asyncrun_code == 11
@@ -103,7 +103,7 @@ function! BuildProj()
 endfunction
 
 " Format the changes
-function! s:ClangFormat()
+function! s:ClangFormat() abort
 	" Copy format file 
 	let cmd = "cp ~/.dotfile/.clang-format " . expand("%:p:h")
 	let cmd_output = system(cmd)
@@ -133,7 +133,7 @@ endfunction
 com! ClangFormat call s:ClangFormat()
 
 " Use the downloaded cvs diff file to create a vimdiff
-function! s:Cvsdiff(...)
+function! s:Cvsdiff(...) abort
 	if a:0 > 1
 		let rev = a:2
 	else
@@ -179,7 +179,7 @@ function! s:Cvsdiff(...)
 endfunction
 com! -bar -nargs=? Cvsdiff :call s:Cvsdiff(<f-args>)
 
-function! WinMove(key)
+function! WinMove(key) abort
 	let t:curwin = winnr()
 	exec "wincmd ".a:key
 	if (t:curwin == winnr())
@@ -259,7 +259,7 @@ else
 endif
 
 " Load ctags and omnifunc in C++ files opened
-" autocmd BufNewFile,BufRead,BufEnter *.cpp,*.hpp,*.h,*.C call SetCPPProj()
+autocmd BufNewFile,BufRead,BufEnter *.src,*.cmd,*.cpp,*.hpp,*.h,*.C call SetCPPProj()
 
 
 " Store temporary files in a central spot
