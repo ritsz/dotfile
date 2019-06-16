@@ -141,3 +141,7 @@ nnoremap <silent> <C-h> :call WinMove('h')<cr>
 nnoremap <silent> <C-j> :call WinMove('j')<cr>
 nnoremap <silent> <C-k> :call WinMove('k')<cr>
 nnoremap <silent> <C-l> :call WinMove('l')<cr>
+
+"Swap move to last change [line and character]
+nnoremap '. `.
+nnoremap `. '.
