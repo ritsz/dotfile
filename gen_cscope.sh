@@ -1,25 +1,28 @@
  #!/bin/bash
  
 
- LNX_SNAP=$1
- LNX_SNAP_LOCAL_PATH=/source/$1
+ echo "BUILD DATABASE\n"
 
- mkdir -p /BROWSE/$LNX_SNAP/
+ LNX_SNAP=$1
+ LNX_SNAP_LOCAL_PATH=/Users/gbuilder/Code/$1
+
+ mkdir -p /Users/gbuilder/browse/$LNX_SNAP/
 
  LNX_PATH_LIST=""
 
  while read line; do 
+    echo $line
 	 LNX_PATH_LIST=$LNX_PATH_LIST" "
 	 LNX_PATH_LIST=$LNX_PATH_LIST$LNX_SNAP_LOCAL_PATH/$line
- done </home/gbuilder/.dotfiles/dirList.txt
+ done </Users/gbuilder/.dotfiles/dirList.txt
 
 # No vcxproj files, CVS directories or CVS temp files needed.
 find $LNX_PATH_LIST \
- -not -path "*/\.*" ! -path "*.vcxproj*" ! -path "*/CVS/*"  ! -path "*_format"  ! -path "*#*" ! -path "*.cpp.*" ! -path "*.h.*" ! -path "*.C.*" > /BROWSE/$LNX_SNAP/cscope.files
+    -name "*.cpp" -o -name "*.h" -o -name "*.c" -o -name "*.C" -o -name "*.py" -o -name "*.java" > /Users/gbuilder/browse/$LNX_SNAP/cscope.files
 
 echo $LNX_PATH_LIST
 
-cd /BROWSE/$LNX_SNAP
+cd /Users/gbuilder/browse/$LNX_SNAP
 cscope -b -q -k
 
 clear; 

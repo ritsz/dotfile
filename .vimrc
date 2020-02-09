@@ -1,10 +1,10 @@
 syntax on
 let mapleader=','
 set encoding=utf-8
-set noexpandtab
+set expandtab
 set autoindent			" Copy indentation of current line.
 set cindent				" Use C indentation rules
-set tabstop=4
+set tabstop=3
 set shiftwidth=4
 set softtabstop=0
 set number
@@ -41,8 +41,6 @@ set cscopequickfix=s-,c-,d-,i-,t-,e-,a-
 if has('mouse')
 	set mouse=v
 endif
-
-autocmd BufEnter * lcd %:p:h
 
 "
 " Keybindings

@@ -25,6 +25,8 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'skywind3000/asyncrun.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'majutsushi/tagbar'
+Plugin 'mtdl9/vim-log-highlighting'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -54,5 +56,3 @@ let g:OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
 let g:OmniCpp_MayCompleteDot = 1 " autocomplete after .
 let g:OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
 let g:OmniCpp_MayCompleteScope = 1 " autocomplete after ::
-
-

@@ -14,11 +14,20 @@ endfunction
 
 " Load ctags and omnicomplete for C++
 function! SetCPPProj()
-	set tags+=/BROWSE/tags
-	cs add /BROWSE/cscope.out
+	set tags+=/Users/gbuilder/browse/tags
+	cs add /Users/gbuilder/browse/cscope.out
 endfunction
 
 " Load ctags and omnifunc in C++ files opened
-autocmd BufNewFile,BufRead,BufEnter *.src,*.cmd,*.cpp,*.hpp,*.h,*.C call SetCPPProj()
 
+augroup DEV
+   autocmd!
+   autocmd BufEnter * lcd %:p:h
+   autocmd BufEnter *.java,*.py,*.c,*.cpp,*.h TagbarOpen
+   autocmd BufEnter *.src,*.cmd,*.cpp,*.hpp,*.h,*.C,*.py,*.java call SetCPPProj()
+augroup END
 
+augroup DEVTREE
+    autocmd!
+    ""autocmd BufRead *.c,*.cpp,*.h NERDTree
+augroup END

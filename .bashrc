@@ -14,7 +14,7 @@ fi
 
 if [ -z "$DISPLAY" ]
 then
-	export CSCOPE_EDITOR=vim
+	export CSCOPE_EDITOR=macvim
 else
 	export CSCOPE_EDITOR=gvim
 fi
