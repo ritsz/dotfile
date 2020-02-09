@@ -29,3 +29,4 @@ source ~/.dotfile/functions/buildFunction.vim
 source ~/.dotfile/functions/cscopeHelp.vim     
 source ~/.dotfile/functions/cvsHelper.vim      
 source ~/.dotfile/functions/formatting.vim
+source ~/.dotfile/functions/opengrok.vim
