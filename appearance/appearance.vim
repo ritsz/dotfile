@@ -4,7 +4,7 @@
 "	set guifont=Monospace\ 12
 "else
 "	colorscheme forest-night
-" 	colorscheme dracula
+ 	colorscheme dracula
 "	colorscheme hybrid_reverse
 "	colorscheme onedark
 "endif
