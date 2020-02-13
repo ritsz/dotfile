@@ -27,9 +27,12 @@ nnoremap <silent> N N:call HLNext(0.1)<cr>
 nnoremap <silent> <leader>t :VimuxRunCommand("clear; ctags -R --verbose --c-kinds=+p --c++-kinds=+p --fields=+iamS --extra=+q --exclude=*.vcxproj,*/CVS/*,.#* .")<CR>
 
 " Open searches in browser
-noremap <leader>f :call SearchString()<cr>
-noremap <leader>g :call SearchDefinition()<cr>
-noremap <leader>s :call SearchSymbol()<cr>
+nnoremap <leader>c :call SearchString('n')<cr>
+nnoremap <leader>g :call SearchDefinition('n')<cr>
+nnoremap <leader>s :call SearchSymbol('n')<cr>
+vnoremap <leader>c :call SearchString('v')<cr>
+vnoremap <leader>g :call SearchDefinition('v')<cr>
+vnoremap <leader>s :call SearchSymbol('v')<cr>
 
 " Vertical split 
 nnoremap <silent> <C-\>t :vert scs find t <C-R>=expand("<cword>")<CR><CR>

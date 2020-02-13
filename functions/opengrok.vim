@@ -32,19 +32,18 @@ endfunction
 "
 " Get the string under cursor or visual selection.
 "
-function! s:get_string_to_search()
+function! s:get_string_to_search(mode)
 	" Visual selection "
-	let keyword = s:get_visual_selection()
-	
-	if len(keyword) == 0
+   if a:mode == 'v'
+      let keyword = s:get_visual_selection()
+	elseif a:mode == 'n'
 		" Current word "
 		let keyword = expand("<cword>")
 	endif
-	
 	if len(keyword) == 0
 		return ""
 	endif
-
+   echo keyword
 	return keyword
 endfunction
 
@@ -73,8 +72,8 @@ endfunction
 "
 " Search the string under cursor or under visual selection
 "
-function! SearchString()
-	let keyword = s:get_string_to_search()
+function! SearchString(mode)
+	let keyword = s:get_string_to_search(a:mode)
 	if len(keyword) == 0
 		return 0
 	endif
@@ -85,8 +84,8 @@ endfunction
 "
 " Search the definition of the current word (word on which the cursor is).
 "
-function! SearchDefinition()
-	let keyword = s:get_string_to_search()
+function! SearchDefinition(mode)
+	let keyword = s:get_string_to_search(a:mode)
 	if len(keyword) == 0
 		return 0
 	endif
@@ -97,9 +96,9 @@ endfunction
 "
 " Search the symbol of the current word (word on which the cursor is).
 "
-function! SearchSymbol()
-	let keyword = s:get_string_to_search()
-	if len(keyword) == 0:
+function! SearchSymbol(mode)
+	let keyword = s:get_string_to_search(a:mode)
+	if len(keyword) == 0
 		return 0
 	endif
 	let url = s:get_complete_url(3, keyword)
