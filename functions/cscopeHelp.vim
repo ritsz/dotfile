@@ -24,7 +24,7 @@ augroup DEV
    autocmd!
    autocmd BufEnter * lcd %:p:h
    autocmd BufEnter *.java,*.py,*.c,*.cpp,*.h TagbarOpen
-   autocmd BufEnter *.src,*.cmd,*.cpp,*.hpp,*.h,*.C,*.py,*.java call SetCPPProj()
+   autocmd BufEnter *.log,*.src,*.cmd,*.cpp,*.hpp,*.h,*.C,*.py,*.java call SetCPPProj()
 augroup END
 
 augroup DEVTREE
