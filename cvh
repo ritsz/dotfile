@@ -19,9 +19,11 @@ if __name__ == '__main__':
 
     search_parser = subparsers.add_parser('search', help='Start a cscope on a snap.')
     search_parser.add_argument("snapname", help="Snap to be searched.")
+    search_parser.add_argument("home", default="~", help="Directory where cscope database will be built.")
 
     rebuild_parser = subparsers.add_parser('rebuild', help='Rebuild the snap symbol db')
     rebuild_parser.add_argument("snapname", help='Snap for which we rebuild.')
+    rebuild_parser.add_argument("home", default="~", help="Directory where cscope database will be built.")
 
     args = parser.parse_args()
 
@@ -36,40 +38,40 @@ if __name__ == '__main__':
 #        cmd = '/home/gbuilder/.dotfile/gen_cscope.sh '+args.snapname
 #        callcmd(cmd)
 #
-    if args.option_name == 'search' and args.snapname : 
+    if args.option_name == 'search' and args.snapname :
         print 'searching ' + args.snapname
-        cmd = 'cd /Users/gbuilder/browse'
+        cmd = 'cd ' + args.home + '/browse'
         callcmd(cmd)
-        cmd = 'rm -f /Users/gbuilder/browse/tag*'
+        cmd = 'rm -f ' + args.home + '/browse/tag*'
         callcmd(cmd)
-        cmd = 'rm -f /Users/gbuilder/browse/cscope*'
+        cmd = 'rm -f ' + args.home + '/browse/cscope*'
         callcmd(cmd)
-        cmd = 'ln -s /Users/gbuilder/browse/'+args.snapname+'/cscope.out /Users/gbuilder/browse/cscope.out'
+        cmd = 'ln -s ' + args.home + '/browse/'+args.snapname+'/cscope.out ' + args.home + '/browse/cscope.out'
         callcmd(cmd)
-        cmd = 'ln -s /Users/gbuilder/browse/'+args.snapname+'/cscope.in.out /Users/gbuilder/browse/cscope.in.out'
+        cmd = 'ln -s ' + args.home + '/browse/'+args.snapname+'/cscope.in.out ' + args.home + '/browse/cscope.in.out'
         callcmd(cmd)
-        cmd = 'ln -s /Users/gbuilder/browse/'+args.snapname+'/cscope.po.out /Users/gbuilder/browse/cscope.po.out'
+        cmd = 'ln -s ' + args.home + '/browse/'+args.snapname+'/cscope.po.out ' + args.home + '/browse/cscope.po.out'
         callcmd(cmd)
-        cmd = 'ln -s /Users/gbuilder/browse/'+args.snapname+'/tags /Users/gbuilder/browse/tags'
+        cmd = 'ln -s ' + args.home + '/browse/'+args.snapname+'/tags ' + args.home + '/browse/tags'
         callcmd(cmd)
-        cmd = 'cscope -d -f /Users/gbuilder/browse/cscope.out'
+        cmd = 'cscope -d -f ' + args.home + '/browse/cscope.out'
         os.system(cmd)
 
     if args.option_name == 'rebuild' and args.snapname :
         print 'Rebuilding ' + args.snapname
-        cmd = 'bash /Users/gbuilder/.dotfile/gen_cscope.sh '+args.snapname
+        cmd = 'bash ~/.dotfile/gen_cscope.sh '+args.snapname
         callcmd(cmd)
         print '[DONE] ]Rebuilding ' + args.snapname
-        cmd = 'rm -f /Users/gbuilder/browse/tag*'
+        cmd = 'rm -f ' + args.home + '/browse/tag*'
         callcmd(cmd)
-        cmd = 'rm -f /Users/gbuilder/browse/cscope*'
+        cmd = 'rm -f ' + args.home + '/browse/cscope*'
         callcmd(cmd)
-        cmd = 'ln -s /Users/gbuilder/browse/'+args.snapname+'/cscope.out /Users/gbuilder/browse/cscope.out'
+        cmd = 'ln -s ' + args.home + '/browse/'+args.snapname+'/cscope.out ' + args.home + '/browse/cscope.out'
         callcmd(cmd)
-        cmd = 'ln -s /Users/gbuilder/browse/'+args.snapname+'/cscope.in.out /Users/gbuilder/browse/cscope.in.out'
+        cmd = 'ln -s ' + args.home + '/browse/'+args.snapname+'/cscope.in.out ' + args.home + '/browse/cscope.in.out'
         callcmd(cmd)
-        cmd = 'ln -s /Users/gbuilder/browse/'+args.snapname+'/cscope.po.out /Users/gbuilder/browse/cscope.po.out'
+        cmd = 'ln -s ' + args.home + '/browse/'+args.snapname+'/cscope.po.out ' + args.home + '/browse/cscope.po.out'
         callcmd(cmd)
-        cmd = 'ln -s /Users/gbuilder/browse/'+args.snapname+'/tags /Users/gbuilder/browse/tags'
+        cmd = 'ln -s ' + args.home + '/browse/'+args.snapname+'/tags ' + args.home + '/browse/tags'
         callcmd(cmd)
 

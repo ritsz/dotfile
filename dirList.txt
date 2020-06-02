@@ -1,13 +1,6 @@
-bora/apps/esxupdate
-bora/apps/pythonroot/vmware/esximage
+bora/apps
 bora/install
 bora/vim
-bora/vim/hostd/hostsvc
 bora/vpx/vpxa
 bora/vpx/vpxd
-vum/apps
-vum/install
-vum/lib
-vum/sysimage
-vum/vim
-vum/vpx
+vum

@@ -36,7 +36,7 @@ set title				" Set terminal title
 set completeopt=menu
 set wildmenu
 set nowrap
-set cscopequickfix=s-,c-,d-,i-,t-,e-,a-
+set cscopequickfix=s-,c-,d-,i-,t-,e-
 
 if has('mouse')
 	set mouse=v
