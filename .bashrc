@@ -18,6 +18,5 @@ then
 else
 	export CSCOPE_EDITOR=gvim
 fi
-export PATH=${PATH}:~/.local/bin
 
 source ~/.bash_profile

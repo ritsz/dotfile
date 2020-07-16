@@ -54,5 +54,3 @@ function! s:Cvsdiff(...) abort
 	endif
 endfunction
 com! -bar -nargs=? Cvsdiff :call s:Cvsdiff(<f-args>)
-
-

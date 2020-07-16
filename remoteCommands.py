@@ -4,46 +4,31 @@ import sys
 import paramiko
 
 
-hostname = "uslinux01.commvault.com"
+hostname = "blr-dbc401.eng.vmware.com"
 port = 22
-username = "gbuilder"
-password = "gbuilder"
+username = "rritesh"
 nbytes = 4096
-nodeName = ''
+diffCommand = "p4 diff -dub "
+privkeyfile = "/mts-blr/home/rritesh/.ssh/id_rsa"
 
 
 def SSH_Session():
-    ssh = paramiko.Transport((hostname, port))
-    ssh.connect(username=username, password=password)
-    session = ssh.open_channel(kind='session')
-    return session
+    key = paramiko.RSAKey.from_private_key_file(privkeyfile)
+    sshc = paramiko.Transport((hostname, port))
+    sshc.connect(username = username, pkey = key  )
+    return sshc.open_channel(kind='session')
 
-# Convert local nfs parent path to the parent path on the server.
-# Assumes that the fullpath of file in local nfs mount is provided.
-def create_path(s, revIndex = 0):
-    global nodeName
-    index = int(-1 - revIndex)
-    #Ignore the first 2 splits as it is '' and 'DIR'
-    x = s.split('/')[2:index]
-    nodeName = '/build/11.0/Build80_'+x[0]
-    print "Nodename: ", nodeName
-    x.pop(0)
-    x.insert(0, nodeName)
-    path = '/'.join(x)
-    return path
+def get_workspace(path):
+    if path:
+        return path.split("/")[4]
 
-def get_file_name(s):
-    # Diff of entires directory.
-    if(s[-1] == '/'):
-        return '.'
-
-    x = s.split('/')
-    return x[-1]
-
-def downloaddiff(fileParentPath, fileName, rev = ''):
-    print fileParentPath
+def downloaddiff(fileName, rev = ''):
     print fileName
-    cmd = 'cd ' + fileParentPath + '; cvs diff ' + rev + fileName
+    dirPath = os.path.dirname(fileName)
+    client_root = get_workspace(fileName)
+    cmd = 'goto %s ; ' % (client_root)
+    cmd += 'cd %s ; ' % (dirPath)
+    cmd += diffCommand + rev + fileName
     cmd += ' > diff_file; cat diff_file; rm -f diff_file'
     print cmd
     session = SSH_Session();
@@ -71,12 +56,9 @@ def downloaddiff(fileParentPath, fileName, rev = ''):
 
 
 def compile(path):
-    global nodeName
-    cmd = ''
-    if 'ClProxyConnAPI/Client' in path:
-        cmd = 'cd ' + nodeName +'/cxunix/source; ./buildIBMI'
-    else:
-        cmd = 'cd ' + path + '; make64; '
+    cmd = 'goto %s ; ' %(get_workspace(path))
+    cmd += 'cd %s ; vbazel build ...:all' % (path)
+    print(cmd)
     session = SSH_Session();
     session.exec_command(cmd)
 
@@ -100,33 +82,20 @@ def compile(path):
             print ''.join(stderr_data)
             return 12   #error in compilation
         else:
-            print ''.join(stdout_data)
+            print 'Exit Code: ', session.recv_exit_status()
+            print 'Data : '.join(stdout_data)
             return 0 #success
 
 
 if __name__ == "__main__":
     if(len(sys.argv) < 3):
         sys.exit(-1)    #Give an option, #1 job, #2 file-path
-    
-    s = sys.argv[2]
 
     if(int(sys.argv[1]) < 3):
-        retries = 0
-        ret = 0
-        while retries < int(sys.argv[1]):
-            path = create_path(s, retries)
-            retries = retries + 1;
-            ret = compile(path)
-        
-        # For option 1, it returns the success/error of current path.
-        # Caller can handle the error and decide if it wants to retry.
-        # For option 2, it always does a retry and returns the final code.
+        path = os.path.dirname(sys.argv[2])
+        print "Compiling : ", path
+        ret = compile(path)
         sys.exit(ret)
     elif(int(sys.argv[1]) == 3):
-        #TODO: Handle other CVS commands
-        rev = ''
-        if(len(sys.argv) >= 4):
-            rev = sys.argv[3]
-
-        ret = downloaddiff(create_path(sys.argv[2]), get_file_name(sys.argv[2]), rev)
+        ret = downloaddiff(sys.argv[2])
         sys.exit(ret)

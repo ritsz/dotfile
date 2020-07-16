@@ -1,38 +1,20 @@
 " Key Mappings
 "
-" Hate these errors !!!
 
+" Hate these errors !!!
 cmap Wq wq
-cmap W w
 cmap WQ wq
 
 " Map function keys
-
 noremap <F5> :call BuildProj()<CR>
-noremap <F6> :VimuxRunCommand("cd /BROWSE ; cscope -d")<CR>
 noremap <F7> :Cvsdiff<CR>
-noremap <F8> :VimuxRunCommand("cppcheck --force --enable=information " . expand("%"))<CR>
+noremap <F8> :DiffSaved<CR>
 noremap <F9> :ClangFormat<CR>
-" :noremap <leader><F5> :VimuxRunCommand("clear; python ~/.dotfile/remoteCommands.py 2 " . expand("%:p"))<CR>
-noremap <leader><F7> :DiffSaved<CR>
-noremap <silent> <leader><F5> :diffupdate<CR>
 
 " turn off search highlight with leader and space
 nnoremap <leader><Space> :set hlsearch!<CR>
 nnoremap <silent> n n:call HLNext(0.1)<cr>
 nnoremap <silent> N N:call HLNext(0.1)<cr>
-
-
-" Build ctags for current folder and below
-nnoremap <silent> <leader>t :VimuxRunCommand("clear; ctags -R --verbose --c-kinds=+p --c++-kinds=+p --fields=+iamS --extra=+q --exclude=*.vcxproj,*/CVS/*,.#* .")<CR>
-
-" Open searches in browser
-nnoremap <leader>c :call SearchString('n')<cr>
-nnoremap <leader>g :call SearchDefinition('n')<cr>
-nnoremap <leader>s :call SearchSymbol('n')<cr>
-vnoremap <leader>c :call SearchString('v')<cr>
-vnoremap <leader>g :call SearchDefinition('v')<cr>
-vnoremap <leader>s :call SearchSymbol('v')<cr>
 
 " Vertical split 
 nnoremap <silent> <C-\>t :vert scs find t <C-R>=expand("<cword>")<CR><CR>
@@ -74,9 +56,6 @@ nnoremap <silent> <C-\><C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>CR
 nnoremap <silent> <C-\><C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 nnoremap <silent> <C-\><C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>CR
 
-" Map NERDTree key bindings
-nnoremap <silent> <C-n> :NERDTreeToggle<CR>>
-
 " Move around diff
 noremap <C-u> [c
 noremap <C-d> ]c
@@ -115,11 +94,7 @@ vnoremap <leader>m :normal xx<CR>
 " in same tab with different buffers and windows.
 " noremap leader and direction keys to different tabs"
 nnoremap <silent> <Tab>  :bn<cr>
-nnoremap <silent> <S-Tab> <c-^> 
-
-" Buffer switch
-nnoremap <silent> <leader>q :tabnext<CR>
-nnoremap <silent> <leader>r :tabp<CR>
+nnoremap <silent> <S-Tab> :bp<cr> 
 
 " Map cvs diff command and keys
 noremap <unique> <script> <plug>Cvsdiff :call <SID>Cvsdiff()<CR>
@@ -129,12 +104,9 @@ noremap <unique> <script> <plug>Cvsdiff :call <SID>Cvsdiff()<CR>
 map  ? <Plug>(easymotion-sn)
 map  <Leader>f <Plug>(easymotion-bd-f)
 nmap <Leader>f <Plug>(easymotion-overwin-f)
-
 nmap s <Plug>(easymotion-overwin-f2)
-
 map <Leader>L <Plug>(easymotion-bd-jk)
 nmap <Leader>L <Plug>(easymotion-overwin-line)
-
 map  <Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader>w <Plug>(easymotion-overwin-w)
 
@@ -147,3 +119,14 @@ nnoremap <silent> <C-l> :call WinMove('l')<cr>
 "Swap move to last change [line and character]
 nnoremap '. `.
 nnoremap `. '.
+
+" Map NERDTree key bindings
+" nnoremap <silent> <C-n> :NERDTreeToggle<CR>>
+
+" Open searches in browser
+"nnoremap <leader>c :call SearchString('n')<cr>
+"nnoremap <leader>g :call SearchDefinition('n')<cr>
+"nnoremap <leader>s :call SearchSymbol('n')<cr>
+"vnoremap <leader>c :call SearchString('v')<cr>
+"vnoremap <leader>g :call SearchDefinition('v')<cr>
+"vnoremap <leader>s :call SearchSymbol('v')<cr>
