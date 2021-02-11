@@ -21,16 +21,16 @@ call vundle#begin()
 "Plugin 'scrooloose/nerdtree'                                                             
 "Plugin 'severin-lemaignan/vim-minimap'
 "Plugin 'sheerun/vim-polyglot'
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'chrisbra/vim-diff-enhanced'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'junegunn/fzf.vim'
 "Plugin 'mtdl9/vim-log-highlighting'
 "Plugin 'skywind3000/asyncrun.vim'
 "Plugin 'vim-airline/vim-airline'
 "Plugin 'vim-airline/vim-airline-themes'
+Plugin 'VundleVim/Vundle.vim'
 Plugin 'ap/vim-buftabline'
+Plugin 'chrisbra/vim-diff-enhanced'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'junegunn/fzf.vim'
 call vundle#end()            " required
 filetype plugin indent on    " required
 

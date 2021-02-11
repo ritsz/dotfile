@@ -20,13 +20,13 @@ endfunction
 
 " Load ctags and omnifunc in C++ files opened
 
-"augroup DEV
-"   autocmd!
-"   autocmd BufEnter * lcd %:p:h
+augroup DEV
+   autocmd!
+   autocmd BufEnter * lcd %:p:h
 "   if !&diff
 "      "autocmd BufEnter *.java,*.py,*.c,*.cpp,*.h TagbarOpen
 "      autocmd BufEnter *.log,*.src,*.cmd,*.cpp,*.hpp,*.h,*.C,*.py,*.java call SetCPPProj()
 "      "autocmd BufNewFile,BufRead *.log set wrap
 "      "autocmd BufNewFile,BufRead *.bzl,*.bazel set ts=4
 "   endif
-"augroup END
+augroup END

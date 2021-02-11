@@ -27,7 +27,7 @@ set nocscopeverbose
 set nowrap
 set number
 set ruler
-set shiftwidth=4
+set shiftwidth=3
 set showmatch			" Show matching braces
 set smartcase			" Use smart case for search
 set softtabstop=0
@@ -60,3 +60,17 @@ if has("nvim")
 else
 		source ~/.dotfiles/.vimrc-vim-key
 endif
+
+nnoremap <Leader>H :call<SID>LongLineHLToggle()<cr>
+hi OverLength ctermbg=none cterm=none
+match OverLength /\%>80v/
+fun! s:LongLineHLToggle()
+    if !exists('w:longlinehl')
+        let w:longlinehl = matchadd('ErrorMsg', '.\%>80v', 0)
+        echo "Long lines highlighted"
+    else
+        call matchdelete(w:longlinehl)
+        unl w:longlinehl
+        echo "Long lines unhighlighted"
+    endif
+endfunction
