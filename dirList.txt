@@ -1,6 +1,11 @@
-bora/apps
-bora/install
+bazel
+bora/api
+bora/apps/supportbundle
+bora/install/vpxd
+bora/make
+bora/public
 bora/vim
+bora/vpx/tests
 bora/vpx/vpxa
 bora/vpx/vpxd
-vum
+bora/vpx/wcp

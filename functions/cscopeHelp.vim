@@ -13,10 +13,10 @@ function! LoadCscope() abort
 endfunction
 
 " Load ctags and omnicomplete for C++
-function! SetCPPProj()
+"function! SetCPPProj()
 	set tags+=$CSCOPE_DB_DIR/tags
 	cs add $CSCOPE_DB
-endfunction
+"endfunction
 
 " Load ctags and omnifunc in C++ files opened
 

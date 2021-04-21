@@ -4,9 +4,9 @@
 echo "BUILD DATABASE"
 
 LNX_SNAP=$1
-LNX_SNAP_LOCAL_PATH=$DBC/work/$1
-LNX_DATABASE_FOLDER=$DBC/browse/db_$LNX_SNAP
-echo "DBC = ${DBC}"
+LNX_SNAP_LOCAL_PATH=$BASE/$1
+LNX_DATABASE_FOLDER=$BASE/browse/db_$LNX_SNAP
+echo "BASE = ${BASE}"
 echo "LNX_SNAP = ${LNX_SNAP}"
 echo "LNX_SNAP_LOCAL_PATH = ${LNX_SNAP_LOCAL_PATH}"
 
@@ -23,7 +23,7 @@ done <~/.dotfiles/dirList.txt
 # No vcxproj files, CVS directories or CVS temp files needed.
 find $LNX_PATH_LIST \
 -name "*.cpp" -o -name "*.h" -o -name "*.c" -o -name "*.C" \
--o -name "*.py" -o -name "*.java" -o -name "*.vmodl" \
+-o -name "*.py" -o -name "*.java" -o -name "*.vmodl" -o -name "*.go" \
 -o -name "*.make" -o -name "*.mk" -o -name "*.bazel" -o -name "*.bzl" > $LNX_DATABASE_FOLDER/cscope.files
 
 echo $LNX_PATH_LIST

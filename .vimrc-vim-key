@@ -6,56 +6,6 @@ cmap Wq wq
 cmap WQ wq
 
 " Map function keys
-noremap <F5> :call BuildProj()<CR>
-noremap <F7> :Cvsdiff<CR>
-noremap <F8> :DiffSaved<CR>
-noremap <F9> :ClangFormat<CR>
-
-" turn off search highlight with leader and space
-nnoremap <leader><Space> :set hlsearch!<CR>
-nnoremap <silent> n n:call HLNext(0.1)<cr>
-nnoremap <silent> N N:call HLNext(0.1)<cr>
-
-" Vertical split 
-nnoremap <silent> <C-\>t :vert scs find t <C-R>=expand("<cword>")<CR><CR>
-nnoremap <silent> <C-\>s :vert scs find s <C-R>=expand("<cword>")<CR><CR>
-nnoremap <silent> <C-\>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>CR
-nnoremap <silent> <C-\>g :vert scs find g <C-R>=expand("<cword>")<CR><CR>
-nnoremap <silent> <C-\>f :vert scs find f <C-R>=expand("<cfile>")<CR><CR>CR
-nnoremap <silent> <C-\>e :vert scs find e <C-R>=expand("<cword>")<CR><CR>
-nnoremap <silent> <C-\>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
-nnoremap <silent> <C-\>c :vert scs find c <C-R>=expand("<cword>")<CR><CR>
-
-" Horizontal split
-nnoremap <silent> <C-@>t :scs find t <C-R>=expand("<cword>")<CR><CR>CR
-nnoremap <silent> <C-@>s :scs find s <C-R>=expand("<cword>")<CR><CR>CR
-nnoremap <silent> <C-@>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>CR
-nnoremap <silent> <C-@>g :scs find g <C-R>=expand("<cword>")<CR><CR>CR
-nnoremap <silent> <C-@>f :scs find f <C-R>=expand("<cfile>")<CR><CR>CR
-nnoremap <silent> <C-@>e :scs find e <C-R>=expand("<cword>")<CR><CR>CR
-nnoremap <silent> <C-@>d :scs find d <C-R>=expand("<cword>")<CR><CR>
-nnoremap <silent> <C-@>c :scs find c <C-R>=expand("<cword>")<CR><CR>CR
-
-" Split to a tab
-nnoremap <silent> <C-@><C-@>t :tab cs find t <C-R>=expand("<cword>")<CR><CR>CR
-nnoremap <silent> <C-@><C-@>s :tab cs find s <C-R>=expand("<cword>")<CR><CR>CR
-nnoremap <silent> <C-@><C-@>i :tab cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-nnoremap <silent> <C-@><C-@>g :tab cs find g <C-R>=expand("<cword>")<CR><CR>CR
-nnoremap <silent> <C-@><C-@>f :tab cs find f <C-R>=expand("<cfile>")<CR><CR>CR
-nnoremap <silent> <C-@><C-@>e :tab cs find e <C-R>=expand("<cword>")<CR><CR>CR
-nnoremap <silent> <C-@><C-@>d :tab cs find d <C-R>=expand("<cword>")<CR><CR>
-nnoremap <silent> <C-@><C-@>c :tab cs find c <C-R>=expand("<cword>")<CR><CR>CR
-
-" Open in same tab, different buffer
-nnoremap <silent> <C-\><C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>CR
-nnoremap <silent> <C-\><C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>CR
-nnoremap <silent> <C-\><C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-nnoremap <silent> <C-\><C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>CR
-nnoremap <silent> <C-\><C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>CR
-nnoremap <silent> <C-\><C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>CR
-nnoremap <silent> <C-\><C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
-nnoremap <silent> <C-\><C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>CR
-
 " Move around diff
 noremap <C-u> [c
 noremap <C-d> ]c
@@ -76,16 +26,12 @@ nnoremap E $
 nnoremap <silent> C zz
 nnoremap <silent> T zt
 nnoremap <silent> B zb
-" MOve to parent block
+" Move to parent block
 nnoremap <silent> U [{
 nnoremap <silent> D ]}
 " $/^ doesn't do anything
 nnoremap $ <nop>
 nnoremap ^ <nop>
-
-" Handle comments
-vnoremap <leader>n :normal i//<CR>	
-vnoremap <leader>m :normal xx<CR>
 
 " Tabs are like workspaces. Different 'works' should 
 " have different tabs.
@@ -95,10 +41,6 @@ vnoremap <leader>m :normal xx<CR>
 " noremap leader and direction keys to different tabs"
 nnoremap <silent> <Tab>  :bn<cr>
 nnoremap <silent> <S-Tab> :bp<cr> 
-
-" Map cvs diff command and keys
-noremap <unique> <script> <plug>Cvsdiff :call <SID>Cvsdiff()<CR>
-
 
 " Experimental, using easymotion
 map  ? <Plug>(easymotion-sn)
@@ -121,8 +63,116 @@ nnoremap '. `.
 nnoremap `. '.
 
 " Map NERDTree key bindings
-" nnoremap <silent> <C-n> :NERDTreeToggle<CR>>
+nnoremap <silent> <C-n> :NERDTreeToggle<CR>>
 
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use `[c` and `]c` to navigate diagnostics
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use U to show documentation in preview window
+nnoremap <silent> U :call <SID>show_documentation()<CR>
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Remap for format selected region
+vmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+" Show all diagnostics
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+"
+" ****** C++ Cscope Ctags bindings.
+"
+"noremap <F5> :call BuildProj()<CR>
+"noremap <F7> :Cvsdiff<CR>
+"noremap <F8> :DiffSaved<CR>
+"noremap <F9> :ClangFormat<CR>
+"
+"" turn off search highlight with leader and space
+"nnoremap <leader><Space> :set hlsearch!<CR>
+"nnoremap <silent> n n:call HLNext(0.1)<cr>
+"nnoremap <silent> N N:call HLNext(0.1)<cr>
+"
+"" Vertical split 
+"nnoremap <silent> <C-\>t :vert scs find t <C-R>=expand("<cword>")<CR><CR>
+"nnoremap <silent> <C-\>s :vert scs find s <C-R>=expand("<cword>")<CR><CR>
+"nnoremap <silent> <C-\>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>CR
+"nnoremap <silent> <C-\>g :vert scs find g <C-R>=expand("<cword>")<CR><CR>
+"nnoremap <silent> <C-\>f :vert scs find f <C-R>=expand("<cfile>")<CR><CR>CR
+"nnoremap <silent> <C-\>e :vert scs find e <C-R>=expand("<cword>")<CR><CR>
+"nnoremap <silent> <C-\>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
+"nnoremap <silent> <C-\>c :vert scs find c <C-R>=expand("<cword>")<CR><CR>
+"
+"" Horizontal split
+"nnoremap <silent> <C-@>t :scs find t <C-R>=expand("<cword>")<CR><CR>CR
+"nnoremap <silent> <C-@>s :scs find s <C-R>=expand("<cword>")<CR><CR>CR
+"nnoremap <silent> <C-@>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>CR
+"nnoremap <silent> <C-@>g :scs find g <C-R>=expand("<cword>")<CR><CR>CR
+"nnoremap <silent> <C-@>f :scs find f <C-R>=expand("<cfile>")<CR><CR>CR
+"nnoremap <silent> <C-@>e :scs find e <C-R>=expand("<cword>")<CR><CR>CR
+"nnoremap <silent> <C-@>d :scs find d <C-R>=expand("<cword>")<CR><CR>
+"nnoremap <silent> <C-@>c :scs find c <C-R>=expand("<cword>")<CR><CR>CR
+"
+"" Split to a tab
+"nnoremap <silent> <C-@><C-@>t :tab cs find t <C-R>=expand("<cword>")<CR><CR>CR
+"nnoremap <silent> <C-@><C-@>s :tab cs find s <C-R>=expand("<cword>")<CR><CR>CR
+"nnoremap <silent> <C-@><C-@>i :tab cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+"nnoremap <silent> <C-@><C-@>g :tab cs find g <C-R>=expand("<cword>")<CR><CR>CR
+"nnoremap <silent> <C-@><C-@>f :tab cs find f <C-R>=expand("<cfile>")<CR><CR>CR
+"nnoremap <silent> <C-@><C-@>e :tab cs find e <C-R>=expand("<cword>")<CR><CR>CR
+"nnoremap <silent> <C-@><C-@>d :tab cs find d <C-R>=expand("<cword>")<CR><CR>
+"nnoremap <silent> <C-@><C-@>c :tab cs find c <C-R>=expand("<cword>")<CR><CR>CR
+"
+"" Open in same tab, different buffer
+"nnoremap <silent> <C-\><C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>CR
+"nnoremap <silent> <C-\><C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>CR
+"nnoremap <silent> <C-\><C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+"nnoremap <silent> <C-\><C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>CR
+"nnoremap <silent> <C-\><C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>CR
+"nnoremap <silent> <C-\><C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>CR
+"nnoremap <silent> <C-\><C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+"nnoremap <silent> <C-\><C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>CR
+"
+" Map cvs diff command and keys
+"noremap <unique> <script> <plug>Cvsdiff :call <SID>Cvsdiff()<CR>
+"
 " Open searches in browser
 "nnoremap <leader>c :call SearchString('n')<cr>
 "nnoremap <leader>g :call SearchDefinition('n')<cr>
